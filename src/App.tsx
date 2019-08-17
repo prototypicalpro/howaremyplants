@@ -2,7 +2,6 @@ import React from "react";
 import "./App.css";
 import usePlant from "./usePlant";
 import HumanTime from "./HumanTime";
-import useWindowSize from "./useWindowSize";
 import LowRes from "./img/lowres.jpg";
 import { ReactComponent as DownLogo } from "./img/down.svg";
 import { ReactComponent as LoveLogo } from "./img/love.svg";
@@ -11,7 +10,6 @@ const App: React.FC = () => {
   const plantData = usePlant();
   const imgRef = React.useRef<HTMLImageElement | null>(null);
   const [imgLoaded, setImgLoaded] = React.useState(false);
-  const { width, height } = useWindowSize();
 
   // automagically remove blur when the high quality image has finished loading
   React.useEffect(() => {

@@ -1010,6 +1010,13 @@
   resolved "https://registry.yarnpkg.com/@nodelib/fs.stat/-/fs.stat-1.1.3.tgz#2b5a3ab3f918cca48a8c754c08168e3f03eba61b"
   integrity sha512-shAmDyaQC4H92APFoIaVDHCx5bStIocgvbwQyxPRrbUY20V1EYTbSDchWbuwlMG3V17cprZhA6+78JfB+3DTPw==
 
+"@rehooks/document-visibility@^1.2.0":
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/@rehooks/document-visibility/-/document-visibility-1.2.0.tgz#ec6779ea758e74cf5b8a95b862fb53016bbde983"
+  integrity sha512-hPooZiQNKW3V9xpa4cbjhute9ze5QpmkLMNyZ3iEoyeu1HHJ4uDZYT3lyruugWrK1sUJueYs3H4nKzBdhv3xnA==
+  dependencies:
+    react "^16.7.0-alpha.0"
+
 "@svgr/babel-plugin-add-jsx-attribute@^4.2.0":
   version "4.2.0"
   resolved "https://registry.yarnpkg.com/@svgr/babel-plugin-add-jsx-attribute/-/babel-plugin-add-jsx-attribute-4.2.0.tgz#dadcb6218503532d6884b210e7f3c502caaa44b1"
@@ -8027,7 +8034,7 @@ react-scripts@~3.1.0:
   optionalDependencies:
     fsevents "2.0.7"
 
-react@~16.9.0:
+react@^16.7.0-alpha.0, react@~16.9.0:
   version "16.9.0"
   resolved "https://registry.yarnpkg.com/react/-/react-16.9.0.tgz#40ba2f9af13bc1a38d75dbf2f4359a5185c4f7aa"
   integrity sha512-+7LQnFBwkiw+BobzOF6N//BdoNw0ouwmSJTEm9cglOOmsg/TMiFHZLe2sEoN5M7LgJTj9oHH0gxklfnQe66S1w==

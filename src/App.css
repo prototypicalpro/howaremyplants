@@ -1,0 +1,134 @@
+html, body, #root {
+    margin: 0;
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+    position: absolute;
+}
+
+
+html {
+    /* extremely important: correct font size scaling! tweak until site looks pretty */
+    font-size: 8vw;
+}  
+
+body {
+    font-family: 'Josefin Sans', sans-serif;
+    font-weight: 700;
+    -webkit-text-fill-color: white; /* Will override color (regardless of order) */
+    -webkit-text-stroke-color: black;
+}
+
+#root {
+    overflow-x: scroll;
+    overflow-y: hidden;
+}
+
+p {
+    margin: 0;
+}
+
+.contain {
+    height: 100%;
+}
+
+.bImgContainer {
+    transition: 0.5s filter linear 0.25s;
+}
+
+.bImg {
+    transition: 1s opacity;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+    width: 100%;
+    height: 100%;
+    display: grid;
+    grid-template-columns: 1rem auto 1rem;
+    grid-template-rows: 1.5rem 8fr 2fr 1fr 1rem;
+}
+
+.overlay > * {
+    grid-column: 2;
+}
+
+.plantText {
+    grid-row: 2;
+    font-size: 2.6rem;
+    line-height: 2.8rem;
+    max-width: 1000px;
+    -webkit-text-stroke-width: 2px;
+}
+
+.love {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+@keyframes wiggle {
+    from {
+        transform: translateX(-3px);
+    }
+
+    to {
+        transform: translateX(3px)
+    }
+}
+
+.left {
+    grid-row: 3;
+    width: 2rem;
+    justify-self: start;
+    align-self: center;
+    animation-duration: 0.5s;
+    animation-timing-function: ease-in-out;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+}
+
+.timeText {
+    grid-row: 4;
+    transition: 1s transform ease-out 3s;
+    font-size: 1rem;
+    -webkit-text-stroke-width: 1px;
+    align-self: flex-end;
+}
+
+/** desktop scales differently */
+@media (min-width: 100vh) {
+    html {
+        font-size: 5vh;
+    }
+
+    .contain {
+        height: initial;
+        width: 100%;
+    }
+
+    .left {
+        justify-self: center;
+        align-self: flex-end;
+    }
+
+    @keyframes wiggle {
+        from {
+            transform: rotate(-90deg) translateX(-3px);
+        }
+    
+        to {
+            transform: rotate(-90deg) translateX(3px)
+        }
+    }
+
+    #root {
+        overflow-x: hidden;
+        overflow-y: scroll;
+    }
+}

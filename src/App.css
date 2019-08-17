@@ -9,7 +9,7 @@ html, body, #root {
 
 html {
     /* extremely important: correct font size scaling! tweak until site looks pretty */
-    font-size: 8vw;
+    font-size: 7vw;
 }  
 
 body {

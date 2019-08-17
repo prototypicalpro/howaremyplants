@@ -1,0 +1,22 @@
+language: node_js
+node_js:
+  - "stable"
+dist: trusty
+cache: yarn
+script:
+  - yarn run build
+# and gh-pages deployment
+deploy:
+  provider: pages
+  skip_cleanup: true
+  github_token: $GITHUB_TOKEN
+  keep_history: true
+  local_dir: build
+  fqdn: howaremyplants.net
+  on:
+    branch: master
+# only travis greenkeeper and master
+branches:
+  only:
+    - master
+    - /^greenkeeper.*$/

@@ -5,6 +5,7 @@ dist: trusty
 cache: yarn
 script:
   - yarn run build
+  - yarn run test
 # and gh-pages deployment
 deploy:
   provider: pages

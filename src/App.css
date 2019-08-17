@@ -6,7 +6,6 @@ html, body, #root {
     position: absolute;
 }
 
-
 html {
     /* extremely important: correct font size scaling! tweak until site looks pretty */
     font-size: 7vw;
@@ -17,6 +16,8 @@ body {
     font-weight: 700;
     -webkit-text-fill-color: white; /* Will override color (regardless of order) */
     -webkit-text-stroke-color: black;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 
 #root {

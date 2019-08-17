@@ -1,15 +1,19 @@
 import React from "react";
 import "./App.css";
 import usePlant from "./usePlant";
-import HumanTime from "./HumanTime";
+import useHumanFrom from "./useHumanFrom";
+import useDocumentVisibility from "@rehooks/document-visibility";
 import LowRes from "./img/lowres.jpg";
 import { ReactComponent as DownLogo } from "./img/down.svg";
 import { ReactComponent as LoveLogo } from "./img/love.svg";
 
 const App: React.FC = () => {
-  const plantData = usePlant();
+  const documentVisible = useDocumentVisibility();
+  const isVisible = documentVisible === "visible" || documentVisible === "prerender";
+  const plantData = usePlant(isVisible, 660000);
   const imgRef = React.useRef<HTMLImageElement>(null);
   const [imgLoaded, setImgLoaded] = React.useState(false);
+  const humanForm = useHumanFrom(isVisible, plantData ? new Date(plantData.date_taken) : undefined);
 
   // automagically remove blur when the high quality image has finished loading
   React.useEffect(() => {
@@ -22,10 +26,8 @@ const App: React.FC = () => {
       if (storedRef) {
           storedRef.onload = callback;
           return () => {
-              if (storedRef) {
-                  storedRef.onload = null;
-                  setImgLoaded(false);
-              }
+            if (storedRef) storedRef.onload = null;
+            setImgLoaded(false);
           };
       }
   }, [setImgLoaded, imgRef, plantData]);
@@ -51,7 +53,7 @@ const App: React.FC = () => {
           : <span>Lemme check real quick<LoveLogo height="1em" className="love"></LoveLogo></span> }</p>
         <DownLogo className="left" style={{ display: imgLoaded ? undefined : "none", animationName: imgLoaded ? "wiggle" : undefined }}></DownLogo>
         <p className="timeText" style={{ transform: imgLoaded ? undefined : "translateY(3em)" }}>
-          { imgLoaded && plantData ? `*as of ${ HumanTime(new Date(plantData.date_taken)) }` : ""}
+          { imgLoaded && plantData && humanForm ? `*as of ${ humanForm }` : ""}
         </p>
       </div>
     </div>

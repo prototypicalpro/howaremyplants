@@ -15,13 +15,17 @@ interface IPlantRet {
 const API_URL = "https://plants.prototypical.pro/";
 
 /**
- * Collect data on my git commit history, courtesy of AWS lambda.
+ * Collect data on some plants, courtesy of AWS lambda
  * @returns Some data about plants!
  */
-const usePlant: () => IPlantRet | null = () => {
-    const [plantData, setPlantData] = React.useState(null);
+export default function usePlant(visible = true, refreshInterval?: number): IPlantRet | null {
+    const [plantData, setPlantData] = React.useState<IPlantRet | null>(null);
+    const [now, setNow] = React.useState(Date.now());
+    const timeoutID = React.useRef<number | null>(null);
 
+    // get my plant data!
     React.useEffect(() => {
+        setPlantData(null);
         fetch(API_URL, { mode: "cors" })
         .then((res) => {
             if (res.status === 200) return res.json();
@@ -33,9 +37,24 @@ const usePlant: () => IPlantRet | null = () => {
             console.error(err);
             setPlantData(null);
         });
-    }, [setPlantData]);
+    }, [setPlantData, now]);
+
+    // tell my plant data to keep updating every refreshInterval times
+    React.useEffect(() => {
+        if (refreshInterval && plantData && visible) {
+            // tell the window to update refresh_interval amount after the plant data
+            // says the photo was taken
+            const callback = () => setNow(Date.now());
+            // if we've covered the interval since we last ran this effect, run immediatly
+            if (Date.now() - now > refreshInterval) callback();
+            else {
+                const time_until_next = refreshInterval - (Date.now() - new Date(plantData.date_taken).getTime());
+                 // if time < 0, then wait the full refresh interval so we don't refetch continously
+                timeoutID.current = window.setTimeout(callback, time_until_next < 0 ? refreshInterval : time_until_next);
+                return () => { if (timeoutID.current) window.clearTimeout(timeoutID.current); };
+            }
+        }
+    }, [refreshInterval, setNow, plantData, timeoutID, visible, now]);
 
     return plantData;
-};
-
-export default usePlant;
+}
